@@ -9,6 +9,8 @@ const [enteredMailTouched,setEnteredMailTouched]=useState(false)
 
 const enteredNameIsValid=enteredName.trim()!==''
 const enteredMailIsValid=enteredMail.includes('@');
+const emailInputIsValid=!enteredMailIsValid && enteredMailTouched
+const nameInputIsValid=!enteredNameIsValid && enteredNameTouched
 const [formIsValid,setFormIsValid]=useState(false)
 useEffect(()=>{
 if(enteredNameIsValid && enteredMailIsValid){
@@ -79,7 +81,7 @@ else{
         <input type='text' id='name' onChange={nameInputChangeHandler} value={enteredName} onBlur={nameInputBlurHandler}/>
         
      
-        {!enteredNameIsValid && enteredNameTouched&&<p>Name must not be empty</p>}
+        {nameInputIsValid&&<p>Name must not be empty</p>}
        
       </div>
       <div className='form-control'>
@@ -89,7 +91,7 @@ else{
         
         
         
-        {!enteredMailIsValid && enteredMailTouched && <p>Email must include '@' symbol</p>}
+        {emailInputIsValid && <p>Email must include '@' symbol and must not be empty</p>}
       </div>
       <div className="form-actions">
         <button disabled={!formIsValid}>Submit</button>
